@@ -72,10 +72,6 @@ def oct_trace_pairing(oct1,oct2,gamma):
     pairing=oct_trace(oct3)
     return pairing
 
-def imag_octonion(oct1):
-    imag=oct1-oct_trace(oct1)/2*vector([1,0])
-    return imag
-
 def oct_trilinear(oct1,oct2,oct3,gamma):
     prod=oct_multiply(oct_multiply(oct1,oct2,gamma),oct3,gamma)
     return oct_trace(prod)
@@ -166,7 +162,7 @@ coxETF7=oct_multiply(vector([k,H(0)]),eETF,-1);
 coxETF=[coxETF0,coxETF1,coxETF2,coxETF3,coxETF4,coxETF5,coxETF6,coxETF7];
 cox_Gram=matrix([[oct_pairing(coxETF[i],coxETF[j],-1) for i in range(8)] for j in range(8)])
 
-oct1=octonion_to_vector([H(1),H(0)],coxETF,-1)
+oct1_vec=octonion_to_vector([H(1),H(0)],coxETF,-1)
 
 # create the split basis of the positive definite octonions tensored up to K=Q(i)
 e2ETF=1/2*(vector([HK(0),HK(1)])-t*vector([HK(0),iK]));
@@ -286,7 +282,7 @@ def mult_cox_vecs(vec1,vec2):
     return mult_mat_vec_Cox(vec1)*vec2
     
 def cox_vec_conjugate(vec):
-    return (oct1*Q_trace*vec)*oct1-vec
+    return (oct1_vec*Q_trace*vec)*oct1_vec-vec
     
 #THE MAIN FUNCTIONS FOR G2-SP6
 
@@ -308,9 +304,9 @@ def make_T_list_a1_vecs_cox(T0):
     vec_list_2=short_vecs[c]
     vec_list_3=short_vecs[b]
     for v2 in vec_list_2:
-        if oct1*Q_trace*v2==e:
+        if oct1_vec*Q_trace*v2==e:
             for v3 in vec_list_3:
-                if oct1*Q_trace*v3==f:
+                if oct1_vec*Q_trace*v3==f:
                     if v2*Q_trace*v3==d:
                         v1=cox_vec_conjugate(mult_cox_vecs(v2,v3))
                         Tlist.append([v1,v2,v3])
@@ -474,7 +470,7 @@ def initialize_dict4(n,L):
 
 beta_oct=1/2*vector([HK(-1)+iK+jK+kK,HK(1)+iK+jK+kK])
 beta_oct_p_1=beta_oct+vector([HK(1),HK(0)])
-oct1=vector([HK(1),HK(0)])
+oct1_oct=vector([HK(1),HK(0)])
 E_oct=[2,2,2,beta_oct,beta_oct,beta_oct]
 E_oct_sharp=[2,2,2,-(beta_oct_p_1),-(beta_oct_p_1),-(beta_oct_p_1)]
 
@@ -494,18 +490,18 @@ def delta_E(T_input):
     Temp1=act_exp_Phi(Vj(3,-beta_oct/2),e11,T_input,-1)
     Temp2=act_exp_Phi(e11,Vj(2,-(beta_oct_p_1)/2),Temp1,-1)
     Temp3=act_exp_Phi(e22,Vj(1,(-beta_oct)/2),Temp2,-1)
-    Temp4=act_exp_Phi(Vj(1,oct1),e22,Temp3,-1)
-    Temp5=act_exp_Phi(e22,Vj(1,-oct1),Temp4,-1)
-    Temp6=act_exp_Phi(Vj(1,3/2*oct1),e22,Temp5,-1)
-    Temp7=act_exp_Phi(e22,Vj(1,-oct1),Temp6,-1)
+    Temp4=act_exp_Phi(Vj(1,oct1_oct),e22,Temp3,-1)
+    Temp5=act_exp_Phi(e22,Vj(1,-oct1_oct),Temp4,-1)
+    Temp6=act_exp_Phi(Vj(1,3/2*oct1_oct),e22,Temp5,-1)
+    Temp7=act_exp_Phi(e22,Vj(1,-oct1_oct),Temp6,-1)
     return Temp7
     
 def delta_E_inverse(T_input):
     #implemented for quaternion algebra HK
-    Temp7=act_exp_Phi(e22,Vj(1,oct1),T_input,-1)
-    Temp6=act_exp_Phi(Vj(1,-3/2*oct1),e22,Temp7,-1)
-    Temp5=act_exp_Phi(e22,Vj(1,oct1),Temp6,-1)
-    Temp4=act_exp_Phi(Vj(1,-oct1),e22,Temp5,-1)
+    Temp7=act_exp_Phi(e22,Vj(1,oct1_oct),T_input,-1)
+    Temp6=act_exp_Phi(Vj(1,-3/2*oct1_oct),e22,Temp7,-1)
+    Temp5=act_exp_Phi(e22,Vj(1,oct1_oct),Temp6,-1)
+    Temp4=act_exp_Phi(Vj(1,-oct1_oct),e22,Temp5,-1)
     Temp3=act_exp_Phi(e22,Vj(1,(beta_oct)/2),Temp4,-1)
     Temp2=act_exp_Phi(e11,Vj(2,(beta_oct_p_1)/2),Temp3,-1)
     Temp1=act_exp_Phi(Vj(3,beta_oct/2),e11,Temp2,-1)
