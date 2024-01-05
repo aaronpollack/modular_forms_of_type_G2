@@ -6,7 +6,10 @@
 
 #HOW TO RUN THE G2^c-SP6 CODE:
 
-#Tsplit_list=make_T_list_a1_vecs_split([1,b,c,d,e,f])
+#The following function computes all rank one T in J_R with a fixed given projection.  One inputs a list of 6 integers, the first of which must be 1.  These integers represent a half-integral symmetric matrix.  In terms of ternary quadratic forms, [1,b,c,d,e,f] corresponds to x^2 + by^2 + cz^2 + dyz+ezx+fxy.  The function finds all rank one T in J_R with projection the half-integral symmetric matrix corresponding to T0=[1,b,c,d,e,f].
+#Tsplit_list=make_T_list_a1_vecs_split([1,b,c,d,e,f]) 
+
+#This is the main function for the G2c-Sp6 lift.  With Tsplit_list as above, this function computes the T0 Fourier coefficient of the Siegel modular form F_{k1,k2}^{u,v}(Z).  Here u = exp(n) e_3^* and v = exp(n) e_1, where n is a nilpotent element of G_2^c(K) determined by the list of 6 rational numbers r1,r2,r3,r4,r5,r6.
 #a_Sp6_g_FC(Tsplit_list,k1,k2,[r1,r2,r3,r4,r5,r6]).expand()
 
 #HOW TO RUN THE F4^c-G2 CODE FOR THE (J,I) THETA LIFT:
