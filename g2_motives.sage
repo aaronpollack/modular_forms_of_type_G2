@@ -5,6 +5,7 @@
 #in the case of F_4^c x G_2, the theta lifts are quaternionic modular forms.  Fourier coefficients of such forms are complex numbers, one for each integral binary cubic form au^3 + bu^2v + cuv^2 + dv^3.  The code can calculate this complex number, when the binary cubic has a=1.  (Again, the code could be modified to handle the general case, but this has not been implemented.). The Fourier coefficient produced always lives in Q(sqrt(-1)), so again this can be handled exactly by Sage
 
 #HOW TO RUN THE G2^c-SP6 CODE:
+#this corresponds to the mathematics in section 3 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
 
 #The following function computes all rank one T in J_R with a fixed given projection.  One inputs a list of 6 integers, the first of which must be 1.  These integers represent a half-integral symmetric matrix.  In terms of ternary quadratic forms, [1,b,c,d,e,f] corresponds to x^2 + by^2 + cz^2 + dyz+ezx+fxy.  The function finds all rank one T in J_R with projection the half-integral symmetric matrix corresponding to T0=[1,b,c,d,e,f].
 #Tsplit_list=make_T_list_a1_vecs_split([1,b,c,d,e,f]) 
@@ -13,6 +14,7 @@
 #a_Sp6_g_FC(Tsplit_list,k1,k2,[r1,r2,r3,r4,r5,r6]).expand()
 
 #HOW TO RUN THE F4^c-G2 CODE FOR THE (J,I) THETA LIFT:
+#this corresponds to the mathematics in section 4 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
 
 #the lists below list_1_2, list_1_3, list_2_1 are lists of numbers, at most of length 8.  they move Xoct and Yoct around by unipotent elements of F_4^c(K) to give a new singular pair
 #X1,Y1=list_to_oct_pair_vec(list_1_2,list_1_3,list_2_1,Xoct,Yoct);
@@ -21,6 +23,7 @@
 #my_coefficient_dict=G2_FC_dict_I(n, m_list, X1, Y1); 
 
 #HOW TO RUN THE F4^c-G2 CODE FOR THE (J,E) THETA LIFT:
+#this corresponds to the mathematics in section 4 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
 
 #pari.allocatemem(40737418240)
 #n=5 #(you might run out of memory if n > 6)
@@ -34,6 +37,7 @@
 #Dalal_dim_k(k)
 
 #THE FIELDS, POLYNOMIAL RINGS, AND QUATERNION ALGEBRAS USED TO DO AND OUTPUT COMPUTATIONS
+#this corresponds to the mathematics in section 2 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
 H.<i,j,k>=QuaternionAlgebra(QQ,-1,-1);
 K.<t>=QuadraticField(-1);
 HK.<iK,jK,kK>=QuaternionAlgebra(K,-1,-1);
@@ -42,6 +46,7 @@ HK.<iK,jK,kK>=QuaternionAlgebra(K,-1,-1);
 BB.<v1,v2,v3,w1,w2,w3>=PolynomialRing(K)
 
 #GENERAL CODE FOR OCTONIONS, BINARY CUBICS, AND THE EXCEPTIONAL CUBIC NORM STRUCTURE.
+#this corresponds to the mathematics in section 2 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
 
 def disc_cubic(a,b,c,d):
     return -27*a^2*d^2+18*a*b*c*d+b^2*c^2-4*a*c^3-4*d*b^3
@@ -152,6 +157,8 @@ def octonion_to_vector(myOctonion,octonion_basis,gamma):
     
     
 #SPECIAL BASES AND MATRICES USED IN THE COMPUTATIONS
+#this corresponds to the mathematics in section 2 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
+
 #create the Coxeter basis of the positive definite octonions
 eETF=vector([H(0),H(1)]);hETF=1/2*vector([i+j+k,H(1)]);
 coxETF0=oct_multiply(vector([j,H(0)]),hETF,-1);
@@ -264,6 +271,8 @@ def matrix_list_to_matrix(matrix_list,vector):
                    
 
 #SOME HELPER FUNCTIONS FOR THE MAIN G2-SP6 FUNCTIONS
+#the G2-SP6 lift is discussed in section 3 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
+
 def mult_matrix(octo,oct_basis,gamma):
     mult_mat0=[]
     for j in range(8):
@@ -288,6 +297,7 @@ def cox_vec_conjugate(vec):
     return (oct1_vec*Q_trace*vec)*oct1_vec-vec
     
 #THE MAIN FUNCTIONS FOR G2-SP6
+#this corresponds to the mathematics in section 3 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
 
 #this function takes in a list T0=[1,b,c,d,e,f] of integers, and finds all rank one T=[1,b,c,x1,x2,x3] in J_R whose projection is T0.  The output is a list of lists of size 3 [v1,v2,v3] where vj is the vector representation of xj in the ordered Coxeter basis
 
@@ -373,6 +383,8 @@ def a_Sp6_g_FC(a_T_vec_list,k1,k2,r_vec):
     return gFC
     
 #HELPER FUNCTIONS FOR THE MAIN F4^c TO G2 FUNCTIONS
+#this corresponds to the mathematics in section 4 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
+
 def Vnum(i,j,num):
     theta_basis=splitK_ETF
     if i==1:
@@ -470,6 +482,7 @@ def initialize_dict4(n,L):
     return coeff_dict
     
 #SOME FUNCTIONS AND NOTATION FOR THE JORDAN PAIR (J,E):
+#this corresponds to the mathematics in section 4 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
 
 beta_oct=1/2*vector([HK(-1)+iK+jK+kK,HK(1)+iK+jK+kK])
 beta_oct_p_1=beta_oct+vector([HK(1),HK(0)])
@@ -524,6 +537,7 @@ def triple_norm(T1,T2,T3,gamma):
   
         
 #THE MAIN FUNCTIONS FOR THE F4^c TO G2 LIFT
+#this corresponds to the mathematics in section 4 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
 
 #this function produces an F_4^c(K)-translate of two elements X,Y in J_K.  If X,Y form a singular pair, then the output is acceptable to use as input into G2_FC_dict_I.  The input list_1_2, list_1_3, and list_2_1 must each be at most of length 8.
 
@@ -616,6 +630,7 @@ def G2_FC_dict_I(n, m_list, x, y):
     
     
 #QUADRATIC FORM (X,X)_E:
+#this corresponds to the mathematics in section 4 of the paper ``Computation of Fourier coefficients of automorphic forms of type $G_2$"
 
 #J_E_gram=[[jordan_pairing_E(TcoxK[j],TcoxK[k],-1) for k in range(27)] for j in range(27)] #takes a while to compute, so this is hard-coded in 
 
