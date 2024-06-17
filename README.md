@@ -4,7 +4,7 @@ The main file is 'g2_motives.sage'.  It can be used to compute Fourier coefficie
 
 # jupyter_notebooks
 
-There are 3 Juypter notebooks.  They give examples of how to use the code.  They also show the computations that are used in the paper "Computation of Fourier coefficients of automorphic forms of type G2".
+There are 3 Juypter notebooks.  They give examples of how to use the code.  They also show the computations that are used in the paper "Computation of Fourier coefficients of automorphic forms of type G2".  These computations were done on an Apple Macbook Pro, with an M2 chip and 24 GB of RAM, running Sagemath version 9.7
 
 # Acknowledgement
 
