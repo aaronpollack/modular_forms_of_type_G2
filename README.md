@@ -8,7 +8,7 @@ There are 3 Juypter notebooks.  They give examples of how to use the code.  They
 
 # Acknowledgement
 
-Funding information: AP has been supported by the NSF via grant numbers 2101888 and 2144021
+Funding information: AP has been supported by the NSF via grant numbers 2101888 and 2144021.  Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
 
 ## Authors
 
